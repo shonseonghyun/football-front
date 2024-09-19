@@ -139,7 +139,7 @@ const MatchApply = ({match}:IMatchApplyProps) => {
                 <div>
                     <span style={{display:"inline-flex",marginRight:"8px",fontSize:"12px",alignItems:"center"}}>
                         <img style={{marginRight:"5px",width:"16px"}} src="https://d31wz4d3hgve8q.cloudfront.net/static/img/ic_viewer.svg" />
-                        293
+                        {match.viewCount}
                     </span>
                     <span style={{display:"inline-flex",marginRight:"8px",fontSize:"12px", alignItems:"center"}}>
                         <img style={{marginRight:"5px",width:"16px"}} src="https://d31wz4d3hgve8q.cloudfront.net/static/img/ic_bookmark_filled.svg" />

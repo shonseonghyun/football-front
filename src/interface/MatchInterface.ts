@@ -58,6 +58,7 @@ export interface IMatchResponse{
     matchStatus:IEnumResponse,
     genderRule:IGenderRuleResponse,
     levelRule:ILevelResponse
+    viewCount:number
 }
 
 export interface ISimpleMatcheResponse{
