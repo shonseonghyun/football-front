@@ -32,25 +32,36 @@ const ErrMsg = styled.p`
     font-weight: 700;
 `;
 
+const Desc= styled.p`
+  font-size  :10px ;
+  color:rgb(114,127,136);
+  padding:10px 10px 0 0 ;
+`;
+
 export interface ICustomInputProps{
     label: string,
-    defaultValue?: number,
+    defaultValue?: number|string,
     // register:UseFormRegister<FieldValues>,
     type:string,
+    desc?:string,
     hidden?:boolean,
     placeholder?:string,
     [key: string]: any; 
 }
 
-const CustomInput = ({label,type,hidden,placeholder,defaultValue,...rest}:ICustomInputProps) => {
+const CustomInput = ({label,type,hidden,desc,placeholder,defaultValue,...rest}:ICustomInputProps) => {
     const name = rest.register.name;
     const hasError = !!rest.errors[name];
     
     return (
         <Container>
             <Label hidden={hidden}>{label}</Label>
-            <Input type={type} {...rest.register} placeholder={placeholder} hidden={hidden} value={defaultValue}/>
-
+            <Input type={type} {...rest.register} placeholder={placeholder} hidden={hidden} defaultValue={defaultValue}/>
+            {
+                desc && <Desc>
+                    {desc}
+                </Desc>
+            }
             {
              hasError
              ?

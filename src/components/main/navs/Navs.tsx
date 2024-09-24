@@ -22,7 +22,6 @@ interface INavsProps{
 
 const Navs = ({match}:INavsProps) => {
     const navigate = useNavigate();
-    console.log(match);
 
     return (
         <NavContainer>

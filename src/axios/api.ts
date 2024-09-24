@@ -1,4 +1,6 @@
 import imageCompression from "browser-image-compression";
+import { IJoinRealReqType } from "../components/my/Join";
+import { ILoignRegType } from "../components/my/Login";
 import { IStadiumRegType } from "../components/stadium/reg/StadiumReg";
 import { IMatchRegType } from "../interface/MatchInterface";
 import { API } from "./AxiosInstance";
@@ -75,4 +77,18 @@ export const getMatch = async (matchNo:string)=>{
 export const getStadium = async (stadiumNo:string)=>{
     return await API.get(`/api/v1/stadium/${stadiumNo}`)
             .then(response=>response.data);
+}
+
+export const postLogin = async(data:ILoignRegType)=>{
+    const url = '/api/v1/auth/login';
+    return await API.post(url,
+        data
+    ).then(response=>response.data);
+}
+
+export const postJoin = async(data:IJoinRealReqType)=>{
+    const url = '/api/v1/member';
+    return await API.post(url,
+        data
+    ).then(response=>response.data);
 }

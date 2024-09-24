@@ -4,6 +4,10 @@ import MenuIcon from "../icon/MenuIcon";
 import MyMatchIcon from "../icon/MyMatchIcon";
 import MyPageIcon from "../icon/MyPageIcon";
 import SearchInput from "./SearchInput";
+import { useCallback } from "react";
+import { isLoginSelector } from "../../recoil/AuthUserInfo";
+import { useRecoilValue } from "recoil";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Container = styled.div`
   margin: 0 auto;
@@ -34,8 +38,26 @@ const RightContainer = styled.div`
     gap: 8px;
 `;
 
+const MyPageContainer = styled.div`
+    cursor: pointer;
+`;
 
 const Header = () => {
+    const isLogin = useRecoilValue(isLoginSelector);
+    console.log("로그인 여부:",isLogin); 
+
+    const location = useLocation();
+    const navigate = useNavigate();
+    
+    const clickMyPage= useCallback(()=>{
+        console.log("useCallBack내부:",isLogin);
+        if(isLogin){
+            navigate("/mypage");
+        }else{
+            navigate("/login",{state:location});
+        }
+    },[isLogin]);
+
     return (
         <Container>
             <NavContainer>
@@ -50,8 +72,10 @@ const Header = () => {
 
                 <RightContainer>
                     <SearchInput />
-                    <MyMatchIcon width="24" height="30" /> 
-                    <MyPageIcon width="24" height="30" /> 
+                    <MyMatchIcon width="24" height="30" />
+                    <MyPageContainer onClick={clickMyPage}>
+                        <MyPageIcon width="24" height="30" /> 
+                    </MyPageContainer> 
                 </RightContainer>
             </NavContainer>
         </Container>

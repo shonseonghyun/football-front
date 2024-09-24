@@ -37,11 +37,21 @@ export interface ICustomSelectProps{
 
 
 const CustomSelect = ({label,rules,...rest}:ICustomSelectProps) => {
+    const name =rest.register.name;
+
     return (
         <Container>
             <Label>{label}</Label>
-            <Select {...rest.register} defaultValue={rules?.[0]}>
+            <Select {...rest.register}>
                 {
+                    name=="gender"
+                    ?
+                    rules?.map((rule,key)=>{
+                        if(key!=2){
+                            return <option value={rule.name}>{rule.desc.substring(0,2)}</option>
+                        }
+                    })
+                    :
                     rules?.map((rule,key)=>{
                         return <option value={rule.name}>{rules.length==key+1 ? "제한없음" :  rule.desc }</option>
                     })
