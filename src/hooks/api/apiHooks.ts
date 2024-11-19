@@ -1,13 +1,13 @@
-import { useMutation, useQuery } from "react-query";
-import { getFreeSubNotiTypes, getMatch, getMatchesByStartDt, getMatchesByStartDtAndStadiumNo, getMatchRule, getMember, getPlabMatch, getStadium, postFreeSubNoti, postJoin, postLogin, regMatch } from "../../axios/api";
-import { IApiResponse, IApiResponseWitOutData } from "../../interface/ApiReponse";
-import { IFreeSubNotiSubTypesResponse, IMatchRegType, IMatchResponse, IMatchRuleResponse, ISimpleMatcheResponse } from "../../interface/MatchInterface";
-import { IStadiumResponse } from "../../interface/StadiumInterface";
-import { ILoignRegType } from "../../components/my/Login";
-import { IJoinRealReqType } from "../../components/my/Join";
 import { AxiosError } from "axios";
+import { useMutation, useQuery } from "react-query";
+import { getFreeSubNotiTypes, getMatch, getMatchRule, getMatchesByStartDt, getMatchesByStartDtAndStadiumNo, getMember, getPlabMatch, getStadium, postFreeSubNoti, postJoin, postLogin, regMatch } from "../../axios/api";
+import { IJoinRealReqType } from "../../components/my/Join";
+import { ILoignRegType } from "../../components/my/Login";
+import { IApiResponse } from "../../interface/ApiReponse";
+import { IFreeSubNotiSubTypesResponse, IMatchRegType, IMatchResponse, IMatchRuleResponse, ISimpleMatcheResponse } from "../../interface/MatchInterface";
 import { IMemberResponse } from "../../interface/MemberInterface";
 import { INotiRegType } from "../../interface/NotiInterfact";
+import { IStadiumResponse } from "../../interface/StadiumInterface";
 
 export const useGetMember =(memberNo:number)=>{
     const {data:member,isLoading:isMemberLoading,error:isMemberError} = useQuery<IApiResponse<IMemberResponse>>(
