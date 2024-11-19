@@ -8,19 +8,25 @@ import Login from '../components/my/Login';
 import Join from '../components/my/Join';
 import MyPage from '../components/my/MyPage';
 import FreeSubNotiReg from '../components/noti/freeSub/FreeSubNotiReg';
+import ProtectedRoute from './ProtectedRoute';
 
 const Routers = () => {
     return (
         <Routes>
+            {/* 게스트(회원,비회원 모두) 가능 */}
             <Route path="/" element={<Main />}/>
             <Route path="/match/:matchNo" element={<Match />} />
             <Route path="/match/reg" element={<MatchReg />} />
             <Route path="/stadium/reg" element={<StadiumReg />} />
             <Route path="/stadium/:stadiumNo" element={<StadiumInfo />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/mypage" element={<MyPage />} />
             <Route path="/join" element={<Join />} />
-            <Route path="/noti/freeSub" element={<FreeSubNotiReg />} />
+            
+            {/* 회원 전용 */}
+            <Route  element={<ProtectedRoute />}>
+                <Route path="/mypage" element={<MyPage />} />
+                <Route path="/noti/freeSub" element={<FreeSubNotiReg />} />
+            </Route>
         </Routes>
     );
 };

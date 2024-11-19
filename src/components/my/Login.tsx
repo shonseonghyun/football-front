@@ -95,15 +95,17 @@ const Login = () => {
     const [isRememberId,onToggle,checkboxRef,doRememberId,rememberId] = useRememberId(false,getValues);
     const [cookie,removeCookie] = useCookies(["accessToken","refreshToken"]);
 
+    
     const onSuccess = (data:any)=>{
         setAuthUserInfo({
             accessToken:cookie.accessToken,
             refreshToken:cookie.refreshToken,
             memberId:data.data.memberId,
             memberNo:data.data.memberNo
-        })
-        alert("로그인 성공");
-        navigate("/");
+            })
+            
+        const from = location.state?.redirectedFrom?.pathname || "/";
+        navigate(from);
     }
 
     const {mutate} = useLogin(onSuccess);
