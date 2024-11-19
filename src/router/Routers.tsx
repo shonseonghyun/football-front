@@ -7,6 +7,7 @@ import MatchReg from '../components/match/reg/MatchReg';
 import Login from '../components/my/Login';
 import Join from '../components/my/Join';
 import MyPage from '../components/my/MyPage';
+import FreeSubNotiReg from '../components/noti/freeSub/FreeSubNotiReg';
 
 const Routers = () => {
     return (
@@ -19,6 +20,7 @@ const Routers = () => {
             <Route path="/login" element={<Login />} />
             <Route path="/mypage" element={<MyPage />} />
             <Route path="/join" element={<Join />} />
+            <Route path="/noti/freeSub" element={<FreeSubNotiReg />} />
         </Routes>
     );
 };

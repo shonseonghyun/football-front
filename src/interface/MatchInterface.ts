@@ -29,6 +29,7 @@ export interface IGenderRuleResponse{
     desc: string;
 }
 
+
 export interface IPlayerResponse{
     playerNo:number,
     memberNo:number,
@@ -72,4 +73,8 @@ export interface IMatchRuleResponse{
     genderRule:IGenderRuleResponse[],
     levelRule:ILevelRuleResponse[],
     levelType:ILevelResponse[]
+}
+
+export interface IFreeSubNotiSubTypesResponse{
+    freeSubType:IEnumResponse[]
 }

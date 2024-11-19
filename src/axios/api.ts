@@ -4,6 +4,8 @@ import { ILoignRegType } from "../components/my/Login";
 import { IStadiumRegType } from "../components/stadium/reg/StadiumReg";
 import { IMatchRegType } from "../interface/MatchInterface";
 import { API } from "./AxiosInstance";
+import axios from "axios";
+import { INotiRegType } from "../interface/NotiInterfact";
 
 export const regStadium = async (data:IStadiumRegType)=>{
     const formData = new FormData();
@@ -43,8 +45,23 @@ export const regStadium = async (data:IStadiumRegType)=>{
     return response;
 }
 
+export const getPlabMatch = (matchNo:string)=>{
+    // return API.get(`/api/v1/noti/freeSub/${matchNo}`);
+    return axios.get(`https://www.plabfootball.com/api/v2/matches/${matchNo}/`)
+}
+
 export const getMatchRule = async () =>{
     return await API.get('/api/v1/match/rules')
+    .then(response=>response.data);
+}
+
+export const getMember = async (memberNo:number) =>{
+    return await API.get(`/api/v1/member/${memberNo}`)
+    .then(response=>response.data);
+}
+
+export const getFreeSubNotiTypes = async () =>{
+    return await API.get('/api/v1/noti/freeSub/types')
     .then(response=>response.data);
 }
 
@@ -88,6 +105,13 @@ export const postLogin = async(data:ILoignRegType)=>{
 
 export const postJoin = async(data:IJoinRealReqType)=>{
     const url = '/api/v1/member';
+    return await API.post(url,
+        data
+    ).then(response=>response.data);
+}
+
+export const postFreeSubNoti = async (data:INotiRegType)=>{
+    const url = '/api/v1/noti/freeSub';
     return await API.post(url,
         data
     ).then(response=>response.data);

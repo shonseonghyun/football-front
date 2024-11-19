@@ -37,6 +37,9 @@ const Navs = ({match}:INavsProps) => {
             <NavItem onClick={()=>navigate("/stadium/reg")}>
                 구장 등록
             </NavItem>
+            <NavItem onClick={()=>navigate("/noti/freeSub")}>
+                프리서브 알림
+            </NavItem>
         </NavContainer>
     );
 };

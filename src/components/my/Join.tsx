@@ -52,7 +52,7 @@ export interface IJoinRealReqType{
 
 const Join = () => {
     const {register,handleSubmit,getValues,formState:{errors}} = useForm<IJoinReqType>();
-    const {rule} = useGetMatchRule();
+    const {rule,isRuleLoading} = useGetMatchRule();
     const {mutate} = useJoin();
 
     const onValid = (data:IJoinReqType)=>{
@@ -85,7 +85,12 @@ const Join = () => {
                         }
                     })} errors={errors}/>
                     <CustomInput label='이름' type='text' placeholder="이름을 입력하세요" desc='2자 이상 10자 이하의 한글/영어로 설정해주세요' register={register("name")} errors={errors}/>
-                    <CustomSelect label="성별" rules={rule?.data.genderRule} register={register('gender')} />
+                    {
+                        isRuleLoading ?null 
+                        :
+                    <CustomSelect label="성별" values={rule?.data.genderRule} register={register('gender')} />
+                    }
+
                     <CustomInput label='생년월일' type='text' placeholder="예) 19940101" register={register("birthDt")} errors={errors}/>
                     <CustomInput label='휴대폰 번호' type='text' placeholder="예) 01012345678" register={register("tel")} errors={errors}/>
                     <JoinButton>회원가입</JoinButton>

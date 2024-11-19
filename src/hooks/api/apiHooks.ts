@@ -1,11 +1,38 @@
 import { useMutation, useQuery } from "react-query";
-import { getMatch, getMatchesByStartDt, getMatchesByStartDtAndStadiumNo, getMatchRule, getStadium, postJoin, postLogin, regMatch } from "../../axios/api";
-import { IApiResponse } from "../../interface/ApiReponse";
-import { IMatchRegType, IMatchResponse, IMatchRuleResponse, ISimpleMatcheResponse } from "../../interface/MatchInterface";
+import { getFreeSubNotiTypes, getMatch, getMatchesByStartDt, getMatchesByStartDtAndStadiumNo, getMatchRule, getMember, getPlabMatch, getStadium, postFreeSubNoti, postJoin, postLogin, regMatch } from "../../axios/api";
+import { IApiResponse, IApiResponseWitOutData } from "../../interface/ApiReponse";
+import { IFreeSubNotiSubTypesResponse, IMatchRegType, IMatchResponse, IMatchRuleResponse, ISimpleMatcheResponse } from "../../interface/MatchInterface";
 import { IStadiumResponse } from "../../interface/StadiumInterface";
 import { ILoignRegType } from "../../components/my/Login";
 import { IJoinRealReqType } from "../../components/my/Join";
 import { AxiosError } from "axios";
+import { IMemberResponse } from "../../interface/MemberInterface";
+import { INotiRegType } from "../../interface/NotiInterfact";
+
+export const useGetMember =(memberNo:number)=>{
+    const {data:member,isLoading:isMemberLoading,error:isMemberError} = useQuery<IApiResponse<IMemberResponse>>(
+        'member',
+        ()=> getMember(memberNo)
+    );
+
+    return {member,isMemberLoading,isMemberError};
+}
+
+
+export const useGetPlabMatch =(matchNo:string)=>{
+    const useGetPlabMatch = useQuery(
+        'plabMatchInfo',
+        ()=> getPlabMatch(matchNo),
+        {
+            refetchOnWindowFocus:false,
+            enabled:false,
+            retry:0
+        }
+    );
+
+    return useGetPlabMatch;
+} 
+
 
 export const useGetMatchRule =()=>{
     const {data:rule,isLoading:isRuleLoading,error:isRuleError} = useQuery<IApiResponse<IMatchRuleResponse>>(
@@ -14,6 +41,15 @@ export const useGetMatchRule =()=>{
     );
 
     return {rule,isRuleLoading,isRuleError};
+} 
+
+export const useGetFreeSubTypes =()=>{
+    const {data:types,isLoading:isTypesLoading,error:iTypesError} = useQuery<IApiResponse<IFreeSubNotiSubTypesResponse>>(
+        'freeSubTypes',
+        ()=> getFreeSubNotiTypes()
+    );
+
+    return {types,isTypesLoading,iTypesError};
 } 
 // export const useGetMatchRule =()=>{
 //     const {data:rule,isLoading:isRuleLoading,error:isRuleError} = useQuery<IApiResponse<IMatchRuleResponse>,AxiosError,Level>(
@@ -87,7 +123,7 @@ export const useJoin=()=>{
     const mutate= useMutation(
         (data:IJoinRealReqType)=>postJoin(data),
         {
-            onSuccess(data, variables, context) {
+            onSuccess(data) {
                 alert("성공");
             },
             onError(error) {
@@ -97,5 +133,23 @@ export const useJoin=()=>{
             },
         }
     );
+    return {mutate};
+}
+
+export const useFreeSubReg=()=>{
+    const mutate= useMutation(
+        (data:INotiRegType)=>postFreeSubNoti(data),
+        {
+            onError(error) {
+                if(error instanceof AxiosError){
+                    alert(error.response?.data.msg);
+                }
+            },
+            onSuccess(data){
+                alert("등록 완료하였습니다.");
+            }
+        }
+    );
+    
     return {mutate};
 }

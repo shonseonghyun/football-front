@@ -29,33 +29,38 @@ const Select =styled.select`
 export interface ICustomSelectProps{
     label: string,
     // register:UseFormRegister<FieldValues>,
-    rules?: IEnumResponse[];
+    values ?: IEnumResponse[];
+    defaultValue?: number|string,
     [key: string]: any; 
 }
 
 
 
 
-const CustomSelect = ({label,rules,...rest}:ICustomSelectProps) => {
-    const name =rest.register.name;
-
+const CustomSelect = ({label,values,defaultValue,...rest}:ICustomSelectProps) => {
     return (
         <Container>
             <Label>{label}</Label>
-            <Select {...rest.register}>
-                {
+            <Select {...rest.register} defaultValue={defaultValue}>
+                {/* {
                     name=="gender"
                     ?
-                    rules?.map((rule,key)=>{
+                    values?.map((value,key)=>{
                         if(key!=2){
-                            return <option value={rule.name}>{rule.desc.substring(0,2)}</option>
+                            return <option value={value.name}>{value.desc.substring(0,2)}</option>
                         }
                     })
                     :
-                    rules?.map((rule,key)=>{
-                        return <option value={rule.name}>{rules.length==key+1 ? "제한없음" :  rule.desc }</option>
+                    values?.map((value,key)=>{
+                        return <option value={value.name}>{values.length==key+1 ? "제한없음" :  value.desc }</option>
+                    })
+                } */}
+                {
+                    values?.map((value,key)=>{
+                        return <option value={value.name}>{value.desc}</option>
                     })
                 }
+               
             </Select>
         </Container>
     );
