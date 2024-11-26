@@ -1,10 +1,10 @@
 import { AxiosError } from "axios";
 import { useMutation, useQuery } from "react-query";
-import { getFreeSubNotiTypes, getMatch, getMatchRule, getMatchesByStartDt, getMatchesByStartDtAndStadiumNo, getMember, getPlabMatch, getStadium, postFreeSubNoti, postJoin, postLogin, regMatch } from "../../axios/api";
+import { getFreeSubNotiTypes, getFreeSubNoties, getMatch, getMatchRule, getMatchesByStartDt, getMatchesByStartDtAndStadiumNo, getMember, getPlabMatch, getStadium, postFreeSubNoti, postJoin, postLogin, regMatch } from "../../axios/api";
 import { IJoinRealReqType } from "../../components/my/Join";
 import { ILoignRegType } from "../../components/my/Login";
 import { IApiResponse } from "../../interface/ApiReponse";
-import { IFreeSubNotiSubTypesResponse, IMatchRegType, IMatchResponse, IMatchRuleResponse, ISimpleMatcheResponse } from "../../interface/MatchInterface";
+import { IFreeSubNotiSubTypesResponse, IFreeSubNotiesResponse, IMatchRegType, IMatchResponse, IMatchRuleResponse, ISimpleMatcheResponse } from "../../interface/MatchInterface";
 import { IMemberResponse } from "../../interface/MemberInterface";
 import { INotiRegType } from "../../interface/NotiInterfact";
 import { IStadiumResponse } from "../../interface/StadiumInterface";
@@ -152,4 +152,13 @@ export const useFreeSubReg=()=>{
     );
     
     return {mutate};
+}
+
+export const useGetFreeSubNoties=(memberNo:number)=>{
+    const {data:freeSubNoties,isLoading:isFreeSubNotiesoading} = useQuery<IApiResponse<IFreeSubNotiesResponse[]>>(
+        ["memberNo",memberNo],
+        ()=>getFreeSubNoties({memberNo:memberNo}),
+    )
+
+    return {freeSubNoties,isFreeSubNotiesoading}
 }

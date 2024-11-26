@@ -1,14 +1,15 @@
 import { Route, Routes } from 'react-router-dom';
-import StadiumInfo from '../components/stadium/find/StadiumInfo';
-import StadiumReg from '../components/stadium/reg/StadiumReg';
 import Main from '../components/main/Main';
 import Match from '../components/match/find/Match';
 import MatchReg from '../components/match/reg/MatchReg';
-import Login from '../components/my/Login';
 import Join from '../components/my/Join';
+import Login from '../components/my/Login';
 import MyPage from '../components/my/MyPage';
 import FreeSubNotiReg from '../components/noti/freeSub/FreeSubNotiReg';
+import StadiumInfo from '../components/stadium/find/StadiumInfo';
+import StadiumReg from '../components/stadium/reg/StadiumReg';
 import ProtectedRoute from './ProtectedRoute';
+import MySubNoti from '../components/my/MySubNoti';
 
 const Routers = () => {
     return (
@@ -25,6 +26,7 @@ const Routers = () => {
             {/* 회원 전용 */}
             <Route  element={<ProtectedRoute />}>
                 <Route path="/mypage" element={<MyPage />} />
+                <Route path="/mypage/sub-noti" element={<MySubNoti />} />
                 <Route path="/noti/freeSub" element={<FreeSubNotiReg />} />
             </Route>
         </Routes>

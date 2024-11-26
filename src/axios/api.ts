@@ -5,7 +5,7 @@ import { IStadiumRegType } from "../components/stadium/reg/StadiumReg";
 import { IMatchRegType } from "../interface/MatchInterface";
 import { API } from "./AxiosInstance";
 import axios from "axios";
-import { INotiRegType } from "../interface/NotiInterfact";
+import { INotiGetType, INotiRegType } from "../interface/NotiInterfact";
 
 export const regStadium = async (data:IStadiumRegType)=>{
     const formData = new FormData();
@@ -115,4 +115,10 @@ export const postFreeSubNoti = async (data:INotiRegType)=>{
     return await API.post(url,
         data
     ).then(response=>response.data);
+}
+
+export const getFreeSubNoties = async (data:INotiGetType)=>{
+    const url = `/api/v1/noti/freeSub/member/${data.memberNo}`;
+    return await API.get(url)
+        .then(response=>response.data);
 }

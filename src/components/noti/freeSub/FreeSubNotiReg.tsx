@@ -115,7 +115,11 @@ const FreeSubNotiReg = () => {
                 {
                     isMemberLoading 
                     ?  null 
-                    : <CustomInput label="이메일" type="text" hidden errors={errors} register={register("email")} defaultValue={member?.data.email}/>
+                    :
+                    <>
+                        <CustomInput label="이메일" type="text" hidden errors={errors} register={register("email")} defaultValue={member?.data.email}/>
+                        <CustomInput label="유저번호" type="text" hidden errors={errors} register={register("memberNo")} defaultValue={member?.data.memberNo}/>
+                    </> 
                 }
 
                 <CusotmInputContainer>

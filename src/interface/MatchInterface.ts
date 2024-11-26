@@ -78,3 +78,21 @@ export interface IMatchRuleResponse{
 export interface IFreeSubNotiSubTypesResponse{
     freeSubType:IEnumResponse[]
 }
+
+export interface IFreeSubNotiSubTypesResponse{
+    freeSubType:IEnumResponse[]
+}
+
+export interface IFreeSubNotiesResponse{
+    notiNo: number,
+    matchNo: number,
+    matchName: string,
+    startDt: string,
+    startTm: string,
+    subType: string
+}
+
+export const enum SubType {
+	MANAGER_SUB = "MANAGER_FREE",
+	SUPER_SUB = "SUPER_SUB"
+}
