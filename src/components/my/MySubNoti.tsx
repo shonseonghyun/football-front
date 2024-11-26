@@ -2,7 +2,7 @@ import styled from "styled-components";
 import NotiIcon from "../icon/noti/NotiFillIcon";
 import { useRecoilValue } from "recoil";
 import { AuthUserInfo } from "../../recoil/AuthUserInfo";
-import { useGetFreeSubNoties } from "../../hooks/api/apiHooks";
+import { useDelFreeSubNoti, useGetFreeSubNoties } from "../../hooks/api/apiHooks";
 import { SubType } from "../../interface/MatchInterface";
 import { formatDateTime } from "../../utils/DateUtil";
 import { useCallback } from "react";
@@ -77,14 +77,17 @@ const FreeSubType = styled.p<FreeSubTypeProps>`
 
 const MySubNoti = () => {
     const {memberNo} = useRecoilValue(AuthUserInfo);
-    const {freeSubNoties,isFreeSubNotiesoading} = useGetFreeSubNoties(memberNo);
+    const {freeSubNoties} = useGetFreeSubNoties(memberNo);
+    const {mutate}=useDelFreeSubNoti();
 
     const clickedMatch = useCallback((matchNo:number)=>{
         window.open(`https://www.plabfootball.com/match/${matchNo}/`);
     },[]);
 
     const delFreeSubNoti = useCallback((notiNo:number)=>{
-        alert("s");
+        if(window.confirm("알림 취소하시겠습니까?")){
+            mutate.mutate({notiNo:notiNo});
+        }
     },[]);
 
     return (

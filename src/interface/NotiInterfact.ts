@@ -8,3 +8,8 @@ export type INotiRegType = {
 export type INotiGetType ={
     memberNo:number
 }
+
+export type INotiDelType ={
+    notiNo:number
+}
+

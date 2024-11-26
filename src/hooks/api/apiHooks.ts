@@ -1,12 +1,12 @@
 import { AxiosError } from "axios";
 import { useMutation, useQuery } from "react-query";
-import { getFreeSubNotiTypes, getFreeSubNoties, getMatch, getMatchRule, getMatchesByStartDt, getMatchesByStartDtAndStadiumNo, getMember, getPlabMatch, getStadium, postFreeSubNoti, postJoin, postLogin, regMatch } from "../../axios/api";
+import { delFreeSubNoti, getFreeSubNotiTypes, getFreeSubNoties, getMatch, getMatchRule, getMatchesByStartDt, getMatchesByStartDtAndStadiumNo, getMember, getPlabMatch, getStadium, postFreeSubNoti, postJoin, postLogin, regMatch } from "../../axios/api";
 import { IJoinRealReqType } from "../../components/my/Join";
 import { ILoignRegType } from "../../components/my/Login";
 import { IApiResponse } from "../../interface/ApiReponse";
 import { IFreeSubNotiSubTypesResponse, IFreeSubNotiesResponse, IMatchRegType, IMatchResponse, IMatchRuleResponse, ISimpleMatcheResponse } from "../../interface/MatchInterface";
 import { IMemberResponse } from "../../interface/MemberInterface";
-import { INotiRegType } from "../../interface/NotiInterfact";
+import { INotiDelType, INotiRegType } from "../../interface/NotiInterfact";
 import { IStadiumResponse } from "../../interface/StadiumInterface";
 
 export const useGetMember =(memberNo:number)=>{
@@ -161,4 +161,22 @@ export const useGetFreeSubNoties=(memberNo:number)=>{
     )
 
     return {freeSubNoties,isFreeSubNotiesoading}
+}
+
+export const useDelFreeSubNoti=()=>{
+    const mutate= useMutation(
+        (data:INotiDelType)=>delFreeSubNoti(data),
+        {
+            onError(error) {
+                if(error instanceof AxiosError){
+                    alert(error.response?.data.msg);
+                }
+            },
+            onSuccess(data){
+                alert("취소 완료하였습니다.");
+            }
+        }
+    );
+    
+    return {mutate};
 }
